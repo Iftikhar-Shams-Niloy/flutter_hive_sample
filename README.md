@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flutter Hive Sample</title>
-</head>
+
+<h1 align="center"> ⟬Flutter Hive Sample⟭ </Flutter></h1>
 <body>
-
-<h1>📦 Flutter Hive Sample</h1>
-
 <p>
     A comprehensive template and cookbook for implementing <strong>Hive</strong> (lightweight and blazing-fast NoSQL database) in Flutter applications. 
     This project serves as a reference implementation that you can use as a starting point for integrating Hive into your own Flutter projects.
 </p>
 
-<h2>🎯 Purpose</h2>
+<h2> Purpose</h2>
 
 <p>
     This repository is designed to be a reusable template that demonstrates best practices for using Hive in Flutter. 
@@ -22,7 +16,7 @@
     this template provides ready-to-use patterns and examples.
 </p>
 
-<h2>✨ Features</h2>
+<h2> Features</h2>
 
 <ul>
     <li>Complete Hive setup and initialization</li>
