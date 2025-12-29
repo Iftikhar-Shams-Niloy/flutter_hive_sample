@@ -9,25 +9,35 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var boxData = null;
+  var boxData;
+  final TextEditingController _myController = .new();
   final _myBox = Hive.box("my_box");
+
+  @override
+  void dispose() {
+    _myController.dispose();
+    super.dispose();
+  }
 
   //* <--- READ function --->
   void readData() {
     setState(() {
-      boxData = _myBox.get("key-1");
+      boxData = _myBox.get("key");
     });
-    print(boxData);
   }
 
   //* <--- WRITE function --->
   void writeData() {
-    _myBox.put("key-1", "This is test value for 'key-1'...");
+    final value = _myController.text;
+    _myBox.put("key", value);
+    setState(() {
+      _myController.clear();
+    });
   }
 
   //* <--- DELETE function --->
   void deleteData() {
-    _myBox.delete("key-1");
+    _myBox.delete("key");
   }
 
   @override
@@ -38,6 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: TextField(
+              controller: _myController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter value',
+              ),
+            ),
+          ),
+
+          SizedBox(height: 16),
+
           Container(
             margin: EdgeInsets.only(bottom: 16),
             padding: EdgeInsets.all(16),
@@ -45,9 +68,26 @@ class _HomeScreenState extends State<HomeScreen> {
             height: screenHeight / 4,
             width: screenWidth / 1.25,
             child: boxData == null
-                ? const Text("No Data Found")
-                : Text(boxData.toString()),
+                ? const Text(
+                    "No Data Found",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
+                  )
+                : Text(
+                    boxData.toString(),
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
+                  ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
